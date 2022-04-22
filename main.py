@@ -3,9 +3,13 @@ from tkinter import messagebox
 import random
 import pyperclip
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
+
+
 def generate_password():
-    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-               'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R',
+    letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u',
+               'v',
+               'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q',
+               'R',
                'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
@@ -25,12 +29,15 @@ def generate_password():
     pyperclip.copy(password)
 
 # ---------------------------- SAVE PASSWORD ------------------------------- #
+
+
 def save():
     if len(web_entry.get()) == 0 or len(pas_entry.get()) == 0:
         messagebox.showinfo(title="Oops", message="Please don't leave any fields empty")
     else:
         is_ok = messagebox.askokcancel(title=f"{web_entry}",
-                                       message=f"These are details entered:\nEmail: {mail_entry.get()}\nPassword: {pas_entry.get()} \nIs it ok to save?")
+                                       message=f"These are details entered:\nEmail: {mail_entry.get()}\n"
+                                               f"Password: {pas_entry.get()} \nIs it ok to save?")
         if is_ok:
             with open("data.txt", "a") as file:
                 file.write(f"{web_entry.get()} | {mail_entry.get()} | {pas_entry.get()}\n")
@@ -40,6 +47,7 @@ def save():
             mail_entry.insert(0, "someone@example.com")
 
 # ---------------------------- UI SETUP ------------------------------- #
+
 
 window = Tk()
 window.title("Password Manager")
@@ -56,8 +64,8 @@ web.grid(column=0, row=1, sticky="E")
 user_name = Label(text="Email/User Name:")
 user_name.grid(column=0, row=2, sticky="E")
 
-password = Label(text="Password:")
-password.grid(column=0, row=3, sticky="E")
+pass_word = Label(text="Password:")
+pass_word.grid(column=0, row=3, sticky="E")
 
 web_entry = Entry()
 web_entry.grid(column=1, row=1, columnspan=2, sticky="EW")
@@ -75,7 +83,5 @@ gen_pas.grid(column=2, row=3, sticky="EW")
 
 add_pas = Button(text="Add", command=save)
 add_pas.grid(column=1, row=4, columnspan=2, sticky="EW")
-
-
 
 window.mainloop()
